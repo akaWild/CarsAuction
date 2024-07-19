@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  auctionservice:
+  # auctionservice:
     # image: ${DOCKER_REGISTRY-}auctionservice
     # build:
     #   context: .
