@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   auctionservice:
-    image: ${DOCKER_REGISTRY-}auctionservice
-    build:
-      context: .
-      dockerfile: src/AuctionService/Dockerfile
+    # image: ${DOCKER_REGISTRY-}auctionservice
+    # build:
+    #   context: .
+    #   dockerfile: src/AuctionService/Dockerfile
   postgres:
     image: postgres
 volumes:
