@@ -8,5 +8,8 @@ services:
     #   dockerfile: src/AuctionService/Dockerfile
   postgres:
     image: postgres
+  mongodb:
+    image: mongo
 volumes:
   pgdata:
+  mongodata:
