@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionService", "src\Aucti
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D6C14035-7A47-42E4-95B8-81C4E137F0E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchService", "src\SearchService\SearchService.csproj", "{3F4ABE17-829C-47ED-8B06-37B3D03C64C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchService", "src\SearchService\SearchService.csproj", "{3F4ABE17-829C-47ED-8B06-37B3D03C64C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{14A273A0-7359-4440-9234-ED25A084A582} = {14A273A0-7359-4440-9234-ED25A084A582}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
