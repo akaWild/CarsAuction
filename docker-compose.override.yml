@@ -46,6 +46,7 @@ services:
     depends_on: 
       - mongodb
       - rabbitmq
+      - auction-svc
   identity-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
