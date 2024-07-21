@@ -22,6 +22,11 @@ services:
     build:
       context: .
       dockerfile: src/IdentityService/Dockerfile
+  gateway-svc:
+    image: akaWild/gateway-svc:latest
+    build:
+      context: .
+      dockerfile: src/GatewayService/Dockerfile
 volumes:
   pgdata:
   mongodata:

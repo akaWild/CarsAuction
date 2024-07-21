@@ -56,3 +56,9 @@ services:
       - 5000:8080
     depends_on: 
       - postgres
+  gateway-svc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - 6001:8080
