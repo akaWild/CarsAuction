@@ -1,17 +1,17 @@
 version: '3.4'
 
 services:
-  # auctionservice:
-    # image: ${DOCKER_REGISTRY-}auctionservice
-    # build:
-    #   context: .
-    #   dockerfile: src/AuctionService/Dockerfile
   postgres:
     image: postgres
   mongodb:
     image: mongo
   rabbitmq:
     image: rabbitmq:management-alpine
+  auction-svc:
+    image: akaWild/auction-svc:latest
+    build:
+      context: .
+      dockerfile: src/AuctionService/Dockerfile
 volumes:
   pgdata:
   mongodata:
