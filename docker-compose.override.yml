@@ -34,3 +34,15 @@ services:
     depends_on: 
       - postgres
       - rabbitmq
+  search-svc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - RabbitMq__Host=rabbitmq
+      - ConnectionStrings__MongoDbConnection=mongodb://root:mongopw@mongodb
+      - AuctionServiceUrl=http://auction-svc
+    ports:
+      - 7002:8080
+    depends_on: 
+      - mongodb
+      - rabbitmq

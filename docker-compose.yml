@@ -12,6 +12,11 @@ services:
     build:
       context: .
       dockerfile: src/AuctionService/Dockerfile
+  search-svc:
+    image: akaWild/search-svc:latest
+    build:
+      context: .
+      dockerfile: src/SearchService/Dockerfile
 volumes:
   pgdata:
   mongodata:
