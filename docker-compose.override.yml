@@ -28,7 +28,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - RabbitMq__Host=rabbitmq
       - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=auctions;User Id=postgres;Password=postgrespw
-      - IdentityServiceUrl=http://identity-svc
+      - IdentityServiceUrl=http://identity-svc:8080
     ports:
       - 7001:8080
     depends_on: 
@@ -40,7 +40,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - RabbitMq__Host=rabbitmq
       - ConnectionStrings__MongoDbConnection=mongodb://root:mongopw@mongodb
-      - AuctionServiceUrl=http://auction-svc
+      - AuctionServiceUrl=http://auction-svc:8080
     ports:
       - 7002:8080
     depends_on: 
