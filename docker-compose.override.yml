@@ -46,3 +46,12 @@ services:
     depends_on: 
       - mongodb
       - rabbitmq
+  identity-svc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=identity;User Id=postgres;Password=postgrespw
+    ports:
+      - 5000:8080
+    depends_on: 
+      - postgres

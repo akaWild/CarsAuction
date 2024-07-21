@@ -17,6 +17,11 @@ services:
     build:
       context: .
       dockerfile: src/SearchService/Dockerfile
+  identity-svc:
+    image: akaWild/identity-svc:latest
+    build:
+      context: .
+      dockerfile: src/IdentityService/Dockerfile
 volumes:
   pgdata:
   mongodata:
