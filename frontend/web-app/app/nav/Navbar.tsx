@@ -11,7 +11,7 @@ async function Navbar() {
     <header className="sticky top-0 z-50 flex justify-between p-5 items-center text-gray-800 bg-white shadow-md">
       <Logo />
       <Search />
-      {user ? <UserActions /> : <LoginButton />}
+      {user ? <UserActions user={user} /> : <LoginButton />}
     </header>
   );
 }
