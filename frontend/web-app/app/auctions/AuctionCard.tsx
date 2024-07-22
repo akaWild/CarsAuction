@@ -1,12 +1,12 @@
+import { Auction } from "@/types";
 import CarImage from "./CarImage";
 import CountdownTimer from "./CountdownTimer";
 
 type Props = {
-  auction: any;
+  auction: Auction;
 };
 
 function AuctionCard({ auction }: Props) {
-  console.log(auction.imageUrl);
   return (
     <a
       href="#"
