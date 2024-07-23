@@ -5,13 +5,16 @@ import { FieldValues, useForm } from "react-hook-form";
 import Input from "../components/Input";
 import { useEffect } from "react";
 import DateInput from "../components/DateInput";
+import { createAuction } from "../actions/auctionActions";
+import { useRouter } from "next/navigation";
 
 function AuctionForm() {
+  const router = useRouter();
   const {
     control,
     handleSubmit,
     setFocus,
-    formState: { isSubmitting, isValid, isDirty, errors },
+    formState: { isSubmitting, isValid },
   } = useForm({
     mode: "onTouched",
   });
@@ -20,7 +23,18 @@ function AuctionForm() {
     setFocus("make");
   }, [setFocus]);
 
-  function onSubmit(data: FieldValues) {}
+  async function onSubmit(data: FieldValues) {
+    try {
+      const res = await createAuction(data);
+      if (res.error) {
+        throw new Error(res.error);
+      }
+
+      router.push(`/auctions/details/${res.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <form
@@ -91,6 +105,7 @@ function AuctionForm() {
         </Button>
         <Button
           isProcessing={isSubmitting}
+          disabled={!isValid}
           type="submit"
           outline
           color="success">
