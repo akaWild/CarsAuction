@@ -18,9 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "src\Contracts\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "src\IdentityService\IdentityService.csproj", "{19DCE8B5-A346-456C-84D0-62BDB68F508D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayService", "src\GatewayService\GatewayService.csproj", "{FFB92706-8348-4A1F-A466-528C5364498D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayService", "src\GatewayService\GatewayService.csproj", "{FFB92706-8348-4A1F-A466-528C5364498D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiddingService", "src\BiddingService\BiddingService.csproj", "{96421884-0CBB-4F88-94F0-152C86B5664E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiddingService", "src\BiddingService\BiddingService.csproj", "{96421884-0CBB-4F88-94F0-152C86B5664E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
