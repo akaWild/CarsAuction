@@ -9,6 +9,5 @@ namespace BiddingService.Models
         public DateTime BidTime { get; set; } = DateTime.UtcNow;
         public int Amount { get; set; }
         public BidStatus BidStatus { get; set; }
-
     }
 }
