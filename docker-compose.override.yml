@@ -25,12 +25,17 @@ services:
   auction-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8080;7777
       - RabbitMq__Host=rabbitmq
       - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=auctions;User Id=postgres;Password=postgrespw
       - IdentityServiceUrl=http://identity-svc:8080
+      - Kestrel__Endpoints__Grpc__Protocols=Http2
+      - Kestrel__Endpoints__Grpc__Url=http://+:7777
+      - Kestrel__Endpoints__WebApi__Protocols=Http1
+      - Kestrel__Endpoints__WebApi__Url=Http://+:8080
     ports:
       - 7001:8080
+      - 7777:7777
     depends_on: 
       - postgres
       - rabbitmq
