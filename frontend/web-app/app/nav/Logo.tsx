@@ -11,6 +11,8 @@ function Logo() {
 
   function doReset() {
     if (pathname !== "/") router.push("/");
+
+    reset();
   }
 
   return (
