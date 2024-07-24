@@ -32,6 +32,11 @@ services:
     build:
       context: .
       dockerfile: src/BiddingService/Dockerfile
+  notify-svc:
+    image: akaWild/notify-svc:latest
+    build:
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
 volumes:
   pgdata:
   mongodata:

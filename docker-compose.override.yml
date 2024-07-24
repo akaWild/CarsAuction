@@ -80,3 +80,12 @@ services:
     depends_on: 
       - mongodb
       - rabbitmq
+  notify-svc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - RabbitMq__Host=rabbitmq
+    ports:
+      - 7004:8080
+    depends_on: 
+      - rabbitmq
