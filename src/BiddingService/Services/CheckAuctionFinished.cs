@@ -22,7 +22,7 @@ namespace BiddingService.Services
 
             stoppingToken.Register(() => _logger.LogInformation("--> Auction check is stopping..."));
 
-            while (Equals(!stoppingToken.IsCancellationRequested))
+            while (!stoppingToken.IsCancellationRequested)
             {
                 await CheckAuctions(stoppingToken);
 
