@@ -1,5 +1,11 @@
 version: '3.4'
 
+networks:
+  custom:
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
 services:
   postgres:
     environment:
@@ -10,6 +16,8 @@ services:
       - 5433:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      custom:
   mongodb:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -18,10 +26,14 @@ services:
       - 27017:27017
     volumes:
       - mongodata:/var/lib/mongodb/data
+    networks:
+      custom:
   rabbitmq:
     ports:
       - 5672:5672
       - 15672:15672
+    networks:
+      custom:
   auction-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -39,6 +51,8 @@ services:
     depends_on: 
       - postgres
       - rabbitmq
+    networks:
+      custom:
   search-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -52,21 +66,28 @@ services:
       - mongodb
       - rabbitmq
       - auction-svc
+    networks:
+      custom:
   identity-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTP_PORTS=8080
       - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=identity;User Id=postgres;Password=postgrespw
     ports:
-      - 5000:8080
+      - 80:8080
     depends_on: 
       - postgres
+    networks:
+      custom:
+        ipv4_address: 10.5.0.100
   gateway-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - 6001:8080
+    networks:
+      custom:
   bid-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -80,6 +101,8 @@ services:
     depends_on: 
       - mongodb
       - rabbitmq
+    networks:
+      custom:
   notify-svc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -89,15 +112,22 @@ services:
       - 7004:8080
     depends_on: 
       - rabbitmq
+    networks:
+      custom:
   web-app:
     environment:
       - NEXTAUTH_SECRET=somethingreallyreallysecret
-      - NEXTAUTH_URL=http://web-app:3000
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL_INTERNAL=http://web-app:3000
       - API_URL=http://gateway-svc:8080/
-      - ID_URL=http://identity-svc:8080
+      - ID_URL=http://id.carsauction.com
       - NEXT_PUBLIC_NOTIFY_URL=http://gateway-svc:8080/notifications
     ports:
       - 3000:3000
+    extra_hosts:
+      - id.carsauction.com:10.5.0.100
     volumes:
       - /var/lib/web/data
+    networks:
+      custom:
 
