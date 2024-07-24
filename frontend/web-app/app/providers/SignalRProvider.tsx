@@ -22,7 +22,7 @@ function SignalRProvider({ children, user }: Props) {
   const addBid = useBidStore((state) => state.addBid);
 
   useEffect(() => {
-    const newConnection = new HubConnectionBuilder().withUrl("http://localhost:6001/notifications").withAutomaticReconnect().build();
+    const newConnection = new HubConnectionBuilder().withUrl(process.env.NEXT_PUBLIC_NOTIFY_URL!).withAutomaticReconnect().build();
 
     setConnection(newConnection);
   }, []);
@@ -73,7 +73,7 @@ function SignalRProvider({ children, user }: Props) {
     return () => {
       connection?.stop();
     };
-  }, [connection, setCurentPrice]);
+  }, [connection, setCurentPrice, addBid, user?.username]);
 
   return children;
 }
