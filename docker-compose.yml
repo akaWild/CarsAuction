@@ -27,6 +27,11 @@ services:
     build:
       context: .
       dockerfile: src/GatewayService/Dockerfile
+  bid-svc:
+    image: akaWild/bid-svc:latest
+    build:
+      context: .
+      dockerfile: src/BiddingService/Dockerfile
 volumes:
   pgdata:
   mongodata:

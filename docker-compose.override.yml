@@ -67,3 +67,16 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - 6001:8080
+  bid-svc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - RabbitMq__Host=rabbitmq
+      - ConnectionStrings__BidDbConnection=mongodb://root:mongopw@mongodb
+      - IdentityServiceUrl=http://identity-svc:8080
+      - GrpcAuction=http://auction-svc:7777
+    ports:
+      - 7003:8080
+    depends_on: 
+      - mongodb
+      - rabbitmq
