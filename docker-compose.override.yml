@@ -89,3 +89,15 @@ services:
       - 7004:8080
     depends_on: 
       - rabbitmq
+  web-app:
+    environment:
+      - NEXTAUTH_SECRET=somethingreallyreallysecret
+      - NEXTAUTH_URL=http://web-app:3000
+      - API_URL=http://gateway-svc:8080/
+      - ID_URL=http://identity-svc:8080
+      - NEXT_PUBLIC_NOTIFY_URL=http://gateway-svc:8080/notifications
+    ports:
+      - 3000:3000
+    volumes:
+      - /var/lib/web/data
+
