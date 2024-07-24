@@ -74,7 +74,7 @@ async function handleResponse(response: Response) {
   } else {
     const error = {
       status: response.status,
-      message: typeof data === "string" ? data : response.statusText,
+      message: typeof data === "string" && data !== "" ? data : response.statusText,
     };
 
     return { error };
