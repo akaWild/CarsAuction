@@ -86,7 +86,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTP_PORTS=8080
-      - ClientApp=http://app.carsauction.com
+      - ClientApp=https://app.carsauction.com
       - VIRTUAL_HOST=api.carsauction.com
     networks:
       custom:
@@ -135,10 +135,12 @@ services:
   nginx-proxy:
     ports:
       - 80:80
+      - 443:443
     networks:
       custom:
         ipv4_address: 10.5.0.110
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./devcerts:/etc/nginx/certs
     
 
