@@ -73,8 +73,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTP_PORTS=8080
       - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=identity;User Id=postgres;Password=postgrespw
+      - ClientApp=http://app.carsauction.com
+      - VIRTUAL_HOST=id.carsauction.com
     ports:
-      - 80:8080
+      - 8080:8080
     depends_on: 
       - postgres
     networks:
@@ -84,8 +86,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTP_PORTS=8080
-    ports:
-      - 6001:8080
+      - ClientApp=http://app.carsauction.com
+      - VIRTUAL_HOST=api.carsauction.com
     networks:
       custom:
   bid-svc:
@@ -117,17 +119,26 @@ services:
   web-app:
     environment:
       - NEXTAUTH_SECRET=somethingreallyreallysecret
-      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://app.carsauction.com
       - NEXTAUTH_URL_INTERNAL=http://web-app:3000
       - API_URL=http://gateway-svc:8080/
-      - ID_URL=http://id.carsauction.com
+      - ID_URL=http://id.carsauction.com:8080
       - NEXT_PUBLIC_NOTIFY_URL=http://gateway-svc:8080/notifications
-    ports:
-      - 3000:3000
+      - VIRTUAL_HOST=app.carsauction.com
+      - VIRTUAL_PORT=3000
     extra_hosts:
       - id.carsauction.com:10.5.0.100
     volumes:
       - /var/lib/web/data
     networks:
       custom:
+  nginx-proxy:
+    ports:
+      - 80:80
+    networks:
+      custom:
+        ipv4_address: 10.5.0.110
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    
 

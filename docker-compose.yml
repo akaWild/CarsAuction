@@ -42,6 +42,8 @@ services:
     build:
       context: .
       dockerfile: frontend/web-app/Dockerfile
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
 volumes:
   pgdata:
   mongodata:
