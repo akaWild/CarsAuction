@@ -20,12 +20,14 @@ function SignalRProvider({ children, user }: Props) {
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const setCurentPrice = useAuctionStore((state) => state.setCurrentPrice);
   const addBid = useBidStore((state) => state.addBid);
+  const apiUrl =
+    process.env.NODE_ENV === "production" ? "https://api.carsauction.com/notifications" : process.env.NEXT_PUBLIC_NOTIFY_URL;
 
   useEffect(() => {
-    const newConnection = new HubConnectionBuilder().withUrl(process.env.NEXT_PUBLIC_NOTIFY_URL!).withAutomaticReconnect().build();
+    const newConnection = new HubConnectionBuilder().withUrl(apiUrl!).withAutomaticReconnect().build();
 
     setConnection(newConnection);
-  }, []);
+  }, [apiUrl]);
 
   useEffect(() => {
     if (connection) {
