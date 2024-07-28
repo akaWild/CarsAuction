@@ -44,7 +44,7 @@ CarsAuction - фуллстек-приложение, созданное на о�
   ```
   mkcert -key-file carsauction.com.key -cert-file carsauction.com.crt app.carsauction.com api.carsauction.com id.carsauction.com
   ```
-- И последнее, что нужно сделать - создать записи в host файле операционной системы, чтобы можно было запускать приложение с использованием доменных имен (вот [гайд](https://phoenixnap.com/kb/how-to-edit-hosts-file-in-windows-mac-or-linux))
+- И последнее, что нужно сделать - создать записи в host файле операционной системы, чтобы можно было запускать приложение с использованием доменных имен (вот [гайд](https://www.manageengine.com/network-monitoring/how-to/how-to-add-static-entry.html))
   ```
   127.0.0.1 id.carsauction.com app.carsauction.com api.carsauction.com
   ```
