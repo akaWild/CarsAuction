@@ -16,7 +16,7 @@ namespace AuctionService.IntegrationTests.Fixtures
 
         public async Task InitializeAsync()
         {
-            await _postgreSqlContainer.StartAsync();
+            await _postgreSqlContainer.StartAsync().ConfigureAwait(false);
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)

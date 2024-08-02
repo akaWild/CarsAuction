@@ -37,7 +37,7 @@ namespace AuctionService.Controllers
             if (auction == null)
                 return NotFound();
 
-            return _mapper.Map<AuctionDto>(auction);
+            return auction;
         }
 
         [Authorize]
