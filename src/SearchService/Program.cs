@@ -40,7 +40,8 @@ app.Lifetime.ApplicationStarted.Register(async () =>
 {
     try
     {
-        await DbInitializer.InitDb(app);
+        if (app.Environment.EnvironmentName != "Testing")
+            await DbInitializer.InitDb(app);
     }
     catch (Exception e)
     {
@@ -54,3 +55,5 @@ app.Run();
 
 static IAsyncPolicy<HttpResponseMessage> GetPolicy() =>
     HttpPolicyExtensions.HandleTransientHttpError().OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound).WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(3));
+
+public partial class Program { }
