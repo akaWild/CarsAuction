@@ -52,6 +52,47 @@ namespace AuctionService.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        [Fact]
+        public async Task CreateAuction_WithNoAuth_ShouldReturnNotAuthorized()
+        {
+            var auction = new CreateAuctionDto { Make = "test" };
+
+            var response = await _httpClient.PostAsJsonAsync("api/auctions", auction);
+
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task CreateAuction_WithAuth_ShouldReturn201()
+        {
+            var auction = GetAuctionForCreate();
+
+            _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("bob"));
+
+            var response = await _httpClient.PostAsJsonAsync("api/auctions", auction);
+
+            response.EnsureSuccessStatusCode();
+
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+
+            var createdAuction = await response.Content.ReadFromJsonAsync<AuctionDto>();
+
+            Assert.Equal("bob", createdAuction.Seller);
+        }
+
+        [Fact]
+        public async Task CreateAuction_WithInvalidCreateAuctionDto_ShouldReturn400()
+        {
+            var auction = GetAuctionForCreate();
+            auction.Make = null;
+
+            _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("bob"));
+
+            var response = await _httpClient.PostAsJsonAsync("api/auctions", auction);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
         public Task InitializeAsync() => Task.CompletedTask;
 
 
@@ -63,6 +104,20 @@ namespace AuctionService.IntegrationTests
             DbHelper.ReinitDbForTests(db);
 
             return Task.CompletedTask;
+        }
+
+        private CreateAuctionDto GetAuctionForCreate()
+        {
+            return new CreateAuctionDto
+            {
+                Make = "test",
+                Model = "testModel",
+                ImageUrl = "test",
+                Color = "test",
+                Mileage = 10,
+                Year = 10,
+                ReservePrice = 10
+            };
         }
     }
 }
