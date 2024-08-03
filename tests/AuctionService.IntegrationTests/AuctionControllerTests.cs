@@ -93,6 +93,30 @@ namespace AuctionService.IntegrationTests
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        [Fact]
+        public async Task UpdateAuction_WithValidUpdateDtoAndUser_ShouldReturn200()
+        {
+            var updateAuction = new UpdateAuctionDto() { Make = "Updated" };
+
+            _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("bob"));
+
+            var response = await _httpClient.PutAsJsonAsync($"api/auctions/{GT_ID}", updateAuction);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task UpdateAuction_WithValidUpdateDtoAndInvalidUser_ShouldReturn403()
+        {
+            var updateAuction = new UpdateAuctionDto() { Make = "Updated" };
+
+            _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("notbob"));
+
+            var response = await _httpClient.PutAsJsonAsync($"api/auctions/{GT_ID}", updateAuction);
+
+            Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+        }
+
         public Task InitializeAsync() => Task.CompletedTask;
 
 
